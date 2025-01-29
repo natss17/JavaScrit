@@ -68,3 +68,11 @@ let media = (nota1 + nota2 + nota3) / 3;
 
 console.log("Notas:", nota1, nota2, nota3);
 console.log("Média Aritmética:", media.toFixed(2)); 
+
+// conversao de temepratura 
+
+let celsius = 40; 
+
+let fahrenheit = (celsius * 9/5) + 40;
+
+console.log(celsius + "°C equivalem a " + fahrenheit + "°F");
