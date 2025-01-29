@@ -56,3 +56,15 @@ let metade = numero / 2;
 console.log("Número:", numero);
 console.log("Dobro:", dobro);
 console.log("Metade:", metade);
+
+// Média Aritmética
+let nota1 = 4;  
+let nota2 = 7;  
+let nota3 = 10; 
+
+
+let media = (nota1 + nota2 + nota3) / 3;
+
+
+console.log("Notas:", nota1, nota2, nota3);
+console.log("Média Aritmética:", media.toFixed(2)); 
