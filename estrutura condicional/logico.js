@@ -62,9 +62,25 @@
 //     console.log ("Nome de usuário ou senha incorretos")
 // }
 
-// 06 -  Intervalo de Valores
-let number = prompt ("Digite um numero que esteja entre 10, 20, 30 e 50")
-let number2 = 20
-let number3 = 30 
-let number4 = 50
-if (number > && )
+// 6  Intervalo de Valores
+
+// let num = prompt("Digite um número")
+
+// if (num >= 10 && num <= 20) {
+//     console.log("O número está dentro do intervalo entre 10 e 20")
+// } else if (num >= 30 && num <= 50) {
+//     console.log("O número está dentro do intervalo entre 30 e 50")
+// } else {
+//     console.log("Ele não está dentro do intervalo de 10 e 20 nem 30 e 50")
+// }
+
+// // 7
+
+// let numero = prompt("Digite um numero")
+// if (numero < 10 || numero > 100){
+//     console.log("O número é aceito")
+// } else if(numero == 50){
+//     console.log("O número é aceito")
+// } else{
+//     console.log("O número não é aceito")
+// }

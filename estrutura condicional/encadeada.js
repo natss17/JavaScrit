@@ -120,13 +120,13 @@
 // }
 
 // Pontuação de Jogo de Vídeo Game
-let Pontuação = prompt ("digite sua pontuação")
-if (Pontuação < 1000){
-    console.log("Iniciante")
-} else if (Pontuação < 5000){
-    console.log("Intermediário")
-} else if (Pontuação < 10000) {
-    console.log("Avançado")
-} else if (Pontuação > 10000) {
-    console.log("Mestre")
-}
+// let Pontuação = prompt ("digite sua pontuação")
+// if (Pontuação < 1000){
+//     console.log("Iniciante")
+// } else if (Pontuação < 5000){
+//     console.log("Intermediário")
+// } else if (Pontuação < 10000) {
+//     console.log("Avançado")
+// } else if (Pontuação > 10000) {
+//     console.log("Mestre")
+// }
