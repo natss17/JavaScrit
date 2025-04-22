@@ -53,3 +53,47 @@ aluno2.verificarAprovacao()
 
 //lista de exercicios - Orientação a Objeto 01
 
+class Livro {
+    constructor(titulo, autor, paginas) {
+        this.titulo = titulo
+        this.autor = autor
+        this.paginas = paginas
+    }
+    mostrarDetalhes() {
+        console.log(`Título: ${this.titulo}`) 
+        console.log(`Autor: ${this.autor}`)
+        console.log(`Páginas: ${this.paginas}`)
+    }
+}
+
+// Exemplo de uso
+const livro = new Livro("Se Não Eu, Quem Vai Fazer Você feliz?: Minha História De Amor Com Chorão", 262 )
+livro.mostrarDetalhes()
+
+// 02
+class ContaBancaria {
+    constructor(titular, saldo) {
+        this.titular = titular
+        this.saldo = saldo
+    }
+
+    depositar(valor) {
+        this.saldo += valor
+    }
+
+    sacar(valor) {
+        this.saldo -= valor
+    }
+
+    verSaldo () {
+        console.log(`${this.titular} tem ${this.saldo}`)
+    }
+}
+
+const Conta = new ContaBancaria("Nathalia", 1000)
+
+Conta.verSaldo()
+Conta.depositar(200)
+Conta.verSaldo()
+Conta.sacar(100)
+Conta.verSaldo()
