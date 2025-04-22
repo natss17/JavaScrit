@@ -97,3 +97,68 @@ Conta.depositar(200)
 Conta.verSaldo()
 Conta.sacar(100)
 Conta.verSaldo()
+
+//03
+class Pet {
+    constructor(nome, especie, idade, som) {
+        this.nome = nome
+        this.especie = especie
+        this.idade = idade
+        this.som = som
+    }
+
+    apresentar() {
+        console.log(`${this.nome} é um(a) ${this.especie}, tem ${this.idade} anos e faz "${this.som}".`)
+    }
+}
+
+const cachorro = new Pet("Suzi", "Golden", 5, "Au Au")
+cachorro.apresentar()
+
+class Pet2 {
+    constructor(nome, especie, idade, som) {
+        this.nome = nome
+        this.especie = especie
+        this.idade = idade
+        this.som = som
+    }
+
+    apresentar() {
+        console.log(`${this.nome} é um(a) ${this.especie}, tem ${this.idade} anos e faz "${this.som}".`)
+    }
+}
+
+const gato = new Pet2("Lua", "Persa", 2, "Miau")
+gato.apresentar()
+
+//Atividade 4 
+class Filme {
+    constructor(titulo, genero, duracao) {
+        this.titulo = titulo
+        this.genero = genero
+        this.duracao = duracao
+    }
+
+    exibirInfo() {
+        console.log(`Você está assistindo "${this.titulo}", um filme de ${this.genero} que dura ${this.duracao} minutos.`)
+    }
+}
+
+const filme = new Filme("O Espetacular Homem-Aranha", "Ação, Aventura, Ficção Científica", 136)
+filme.exibirInfo()
+
+//atividade 5 
+class Musica {
+    constructor(nome, artista, tempo) {
+        this.titulo = nome
+        this.autor = artista
+        this.tempo = tempo
+    }
+
+    tocar() {
+        console.log(`Tocando "${this.titulo}" de ${this.autor}.`)
+    }
+}
+
+const musica = new Musica("Tempo Perdido", "Legião Urbana", 4.23)
+musica.tocar()
