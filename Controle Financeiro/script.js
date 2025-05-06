@@ -94,3 +94,7 @@ function calcularTotal() {
     spanSaidas.innerHTML = totalSaidaFixado
     spanTotal.innerHTML = saldoTotal
 }
+const obterItensBD = () => JSON.parse(localStorage.getItem("bd_itens")) ?? []
+const salvarItensBD = () => localStorage.setItem("bd_itens", JSON.stringify(listarItens))
+
+carregarItens()
