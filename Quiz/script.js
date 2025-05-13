@@ -1,25 +1,57 @@
-// Cada pergunta tem:
-// - A pergunta
-// - as opções
-// - a alternativa certa (começa no 0)
-const perguntas = [
-    {
-        pergunta: "Qual o nome da nossa escola?",
-        opcoes: ["Luis Eulalio de Bueno Vidigal Filho", "Luis Eulalio", "Luis de Bueno", "Luis Eulalio de Vidigal"],
-        correta: 0,
-    },
-    {
-        pergunta: "Qual o nome do nosso curso?",
-            pergunta: "Qual o nome do nosso curso?",
-            opcoes: ["Analise e Desenvolvimento de Sistemas", "Sistemas de informação", "Desenvolvimento de sistemas", "Ciência da Computação"],
-            correta: 2,
-    },
-    {
-            pergunta: "Em que ano foi fundada a nossa escola?",
-            opcoes: ["1999", "1942", "1985", "1970"],
-            correta: 1,
-    },
-]
+const perguntas = [ 
+    { 
+      pergunta: "Qual é o continente onde se localiza o Brasil?", 
+      opcoes: ["América", "Europa", "Ásia", "África"], 
+      correta: 0, 
+    }, 
+    { 
+      pergunta: "Quem foi o responsável por descobrir o Brasil em 1500?", 
+      opcoes: ["Cristóvão Colombo", "Pedro Álvares Cabral", "Dom Pedro I", "Tiradentes"], 
+      correta: 1, 
+    }, 
+    { 
+      pergunta: "Qual é o principal idioma falado no Brasil?", 
+      opcoes: ["Espanhol", "Inglês", "Português", "Francês"], 
+      correta: 2, 
+    }, 
+    { 
+      pergunta: "O que marca a abolição da escravidão no Brasil?", 
+      opcoes: ["Constituição de 1824", "Independência do Brasil", "Lei Áurea", "Revolta da Vacina"], 
+      correta: 2, 
+    }, 
+    { 
+      pergunta: "Qual é o sistema de governo do Brasil?", 
+      opcoes: ["República", "Monarquia", "Ditadura", "Império"], 
+      correta: 0, 
+    }, 
+    { 
+      pergunta: "Qual é a capital do Brasil?", 
+      opcoes: ["Rio de Janeiro", "São Paulo", "Brasília", "Salvador"], 
+      correta: 2, 
+    }, 
+    { 
+      pergunta: "Em qual continente está localizada a África do Sul?", 
+      opcoes: ["África", "América do Norte", "Europa", "Ásia"], 
+      correta: 0, 
+    }, 
+    { 
+      pergunta: "Qual é o maior país do mundo em extensão territorial?", 
+      opcoes: ["Estados Unidos", "Brasil", "China", "Rússia"], 
+      correta: 3, 
+    }, 
+    { 
+      pergunta: "Quem liderou o movimento da independência dos Estados Unidos?", 
+      opcoes: ["Napoleão Bonaparte", "George Washington", "Abraham Lincoln", "Simon Bolívar"], 
+      correta: 1, 
+    }, 
+    { 
+      pergunta: "O que estuda a Geografia?", 
+      opcoes: ["Os planetas e estrelas", "A terra, os espaços e paisagens", "A história dos deuses", "As línguas e palavras"], 
+      correta: 1, 
+    } 
+  ]
+  
+
 // variáveis para controlar o quiz
 let perguntaAtual = 0 //Qual pergunta está sendo mostrada
 let pontuacao = 0 //Quantidade dos acertos
