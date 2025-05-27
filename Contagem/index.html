@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contagem Regressiva para Carnaval 2026</title>
+
+  <!-- Fonte carnavalesca -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
+
+  <style>
+ body {
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  background-color: #ffe6f0;
+  background-size: cover;
+  background-position: center;
+  color: #333;
+  position: relative;
+}
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 3rem;
+      color: #d0008b; /* cor vibrante */
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+      margin-bottom: 20px;
+      z-index: 2;
+    }
+
+    #contador {
+      font-size: 1.8rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 15px 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgb(0 0 0 / 0.2);
+      white-space: nowrap;
+      text-align: center;
+      margin-bottom: 20px;
+      z-index: 2;
+    }
+
+    #barra-container {
+      width: 80%;
+      height: 20px;
+      background-color: #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    #barra-progresso {
+      height: 100%;
+      width: 0%;
+      background-color: #4caf50;
+      transition: width 1s linear;
+    }
+
+    .icone-carnaval {
+      position: absolute;
+      font-size: 7rem;
+      top: 10px;
+      user-select: none;
+      z-index: 3;
+    }
+
+    #icone-esquerdo {
+      left: 15px;
+      transform: rotate(-20deg);
+    }
+
+    #icone-direito {
+      right: 15px;
+      transform: rotate(20deg);
+    }
+  </style>
+</head>
+<body>
+  <div id="icone-esquerdo" class="icone-carnaval">🎭</div>
+  <div id="icone-direito" class="icone-carnaval">🎊</div>
+
+  <h1>Contagem Regressiva para o Carnaval de 2026 🎉</h1>
+  <div id="contador"></div>
+  <div id="barra-container">
+    <div id="barra-progresso"></div>
+  </div>
+
+  <audio id="somChegou" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg" preload="auto"></audio>
+
+  <script>
+    const somChegou = document.getElementById('somChegou')
+    const dataInicio = new Date()
+    const dataAlvo = new Date(2026, 1, 17, 23, 59, 59)
+    const duracaoTotal = dataAlvo - dataInicio
+
+    function atualizarContador() {
+      const agora = new Date()
+      const diferenca = dataAlvo - agora
+
+      if (diferenca <= 0) {
+        document.getElementById("contador").textContent = "O Carnaval de 2026 começou! 🎉 Aproveite a festa!"
+        somChegou.play()
+        document.getElementById("barra-progresso").style.width = "100%"
+        clearInterval(intervalo)
+        return
+      }
+
+      const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24))
+      const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+      const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60))
+      const segundos = Math.floor((diferenca % (1000 * 60)) / 1000)
+
+      document.getElementById("contador").textContent =
+        `Dias: ${dias} Horas: ${horas} Minutos: ${minutos} Segundos: ${segundos}`
+
+      const decorrido = duracaoTotal - diferenca
+      const percentual = (decorrido / duracaoTotal) * 100
+      document.getElementById("barra-progresso").style.width = percentual + "%"
+    }
+
+    atualizarContador()
+    const intervalo = setInterval(atualizarContador, 1000)
+  </script>
+</body>
+</html>
