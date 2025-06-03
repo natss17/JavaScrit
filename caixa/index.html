@@ -1,58 +1,235 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>💊 Sistema de Caixa - Farmácia 💊</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #d6ecff; /* azul claro */
+      margin: 0;
+      padding: 20px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      min-height: 100vh;
+    }
+
+    h2 {
+      color: #003366;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      color: #003366;
+      margin-top: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin: 10px 0 5px 0;
+    }
+
+    input, select, button {
+      margin: 5px;
+      padding: 8px;
+      font-size: 16px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      width: 250px;
+      max-width: 100%;
+    }
+
+    button {
+      background-color: darkcyan;
+      color: white;
+      border: none;
+      cursor: pointer;
+      width: 260px;
+      max-width: 100%;
+      margin: 10px 0;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    table {
+      width: 80%;
+      max-width: 700px;
+      border-collapse: collapse;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+
+    .linha {
+      margin-top: 15px;
+      width: 80%;
+      max-width: 700px;
+      text-align: center;
+    }
+
+  </style>
 </head>
 <body>
-    <h2>Simulador de Caixa</h2>
+  <h2>💊🩺 Sistema de Caixa - Farmácia 🧴🧼</h2>
 
-    <label>Valor (R$)
-        <input type="number" id="valor" step="0.01">
+  <label>🧾 Produto:
+    <select id="produto">
+      <option value="">-- Selecione --</option>
+    </select>
+  </label>
+
+  <label>🔢 Quantidade:
+    <input type="number" id="quantidade" min="1" value="1">
+  </label>
+
+  <button onclick="adicionarItem()">➕ Adicionar</button>
+  <button onclick="limparTudo()">❌ Cancelar Venda</button>
+  
+  <!-- Botão do cupom -->
+  <button onclick="aplicarDesconto()">🎟️ Aplicar cupom de desconto de 5%</button>
+
+  <h3>🛒 Itens da Venda:</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>📦 Produto</th>
+        <th>📂 Categoria</th>
+        <th>🔢 Qtd</th>
+        <th>💰 Unitário (R$)</th>
+        <th>💵 Subtotal (R$)</th>
+      </tr>
+    </thead>
+    <tbody id="corpoTabela"></tbody>
+  </table>
+
+  <h3>💳 Total: R$ <span id="total">0.00</span></h3>
+
+  <div class="linha">
+    <label>💸 Valor Recebido (R$):
+      <input type="number" id="valorRecebido" step="0.01">
     </label>
-    <br><br>
+    <button onclick="calcularTroco()">📤 Calcular Troco</button>
+  </div>
 
-    <button onclick="adicionarItem()">Adicionar a compra</button>
-    <button onclick="limparTudo()">Limpar Tudo</button> 
+  <h3>🪙 Troco: R$ <span id="troco">0.00</span></h3>
 
-    <h3>Itens: </h3>
-    <ul id="listarItens"></ul>
-    <h3>Total: R$ <span id="total">0.00</span></h3>
-    <script>
-        let total = 0
-function adicionarItem() {
-  const produto = document.getElementById("produto").value
-  const valor = parseFloat(document.getElementById("valor").
-  value)
-  const quantidade = parseInt(document.getElementById
-  ("quantidade").value)
+  <button onclick="finalizarVenda()">✅ Finalizar Venda</button>
 
-  if(!produto || isNaN(valor) || isNaN(quantidade)) {
-    alert("Preencha todos os campos corretamente")
-  }
+  <script>
+    const produtos = [
+      { nome: "Dipirona 500mg", categoria: "Medicamento", preco: 5.00 },
+      { nome: "Paracetamol 750mg", categoria: "Medicamento", preco: 6.50 },
+      { nome: "Escova de Dente", categoria: "Higiene", preco: 3.75 },
+      { nome: "Sabonete Antisséptico", categoria: "Higiene", preco: 4.20 },
+      { nome: "Vitamina C 500mg", categoria: "Vitamina", preco: 7.80 },
+      { nome: "Álcool Gel 70%", categoria: "Higiene", preco: 4.90 }
+    ]
 
-  const subtotal = valor * quantidade
-  total += subtotal
+    let total = 0
+    let descontoAplicado = false
 
-  const lista = document.getElementById("listarItens")
-const item = document.createElement("li")
-item.textContent = `${produto} - R$${valor.toFixed(2)} x ${quantidade} = R$${subtotal.toFixed(2)}`
-lista.appendChild(item) 
+    const select = document.getElementById("produto")
+    produtos.forEach((p, index) => {
+      const option = document.createElement("option")
+      option.value = index
+      option.textContent = `${p.nome} - R$${p.preco.toFixed(2)} (${p.categoria})`
+      select.appendChild(option)
+    })
 
-document.getElementById("total").textContent = total.toFixed(2)
+    function adicionarItem() {
+      if (descontoAplicado) {
+        alert("Você já aplicou o desconto. Para adicionar novos itens, cancele a venda e comece novamente.")
+        return
+      }
+      
+      const index = document.getElementById("produto").value
+      const quantidade = parseInt(document.getElementById("quantidade").value)
+      if (index === "" || isNaN(quantidade) || quantidade <= 0) {
+        alert("Selecione um produto e informe uma quantidade válida.")
+        return
+      }
 
-// Limpar campos depois de adicionar um produto
-document.getElementById("produto").value = ""
-document.getElementById("valor").value = ""
-document.getElementById("quantidade").value = ""
+      const produto = produtos[index]
+      const subtotal = produto.preco * quantidade
+      total += subtotal
 
-}
-function limparTudo() {
-document.getElementById("listarItens").innerHTML = ""
-document.getElementById("total").textContent = "0.00"
-total = 0
-}
-    </script>
+      const linha = document.createElement("tr")
+      linha.innerHTML = `
+        <td>${produto.nome}</td>
+        <td>${produto.categoria}</td>
+        <td>${quantidade}</td>
+        <td>${produto.preco.toFixed(2)}</td>
+        <td>${subtotal.toFixed(2)}</td>
+      `
+      document.getElementById("corpoTabela").appendChild(linha)
+      document.getElementById("total").textContent = total.toFixed(2)
+
+      document.getElementById("produto").value = ""
+      document.getElementById("quantidade").value = "1"
+    }
+
+    function limparTudo() {
+      document.getElementById("corpoTabela").innerHTML = ""
+      document.getElementById("total").textContent = "0.00"
+      document.getElementById("troco").textContent = "0.00"
+      document.getElementById("valorRecebido").value = ""
+      total = 0
+      descontoAplicado = false
+    }
+
+    function aplicarDesconto() {
+      if (total === 0) {
+        alert("Adicione pelo menos um item antes de aplicar o desconto.")
+        return
+      }
+      if (descontoAplicado) {
+        alert("O desconto já foi aplicado.")
+        return
+      }
+      const desconto = total * 0.05
+      total -= desconto
+      descontoAplicado = true
+      document.getElementById("total").textContent = total.toFixed(2)
+      alert(`Desconto de 5% aplicado! Você economizou R$${desconto.toFixed(2)}.`)
+    }
+
+    function calcularTroco() {
+      const valorRecebido = parseFloat(document.getElementById("valorRecebido").value)
+      if (isNaN(valorRecebido)) {
+        alert("Digite um valor recebido válido.")
+        return
+      }
+
+      if (valorRecebido < total) {
+        alert("Valor recebido insuficiente.")
+        return
+      }
+
+      const troco = valorRecebido - total
+      document.getElementById("troco").textContent = troco.toFixed(2)
+    }
+
+    function finalizarVenda() {
+      if (total === 0) {
+        alert("Nenhum item na venda.")
+        return
+      }
+
+      const troco = document.getElementById("troco").textContent
+      alert(`✅ Venda finalizada!\nTotal: R$${total.toFixed(2)}\nTroco: R$${troco}`)
+      limparTudo()
+    }
+  </script>
 </body>
 </html>
