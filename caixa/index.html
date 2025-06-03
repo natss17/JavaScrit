@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Simulador de Caixa</h2>
+
+    <label>Valor (R$)
+        <input type="number" id="valor" step="0.01">
+    </label>
+    <br><br>
+
+    <button onclick="adicionarItem()">Adicionar a compra</button>
+    <button onclick="limparTudo()">Limpar Tudo</button> 
+
+    <h3>Itens: </h3>
+    <ul id="listarItens"></ul>
+    <h3>Total: R$ <span id="total">0.00</span></h3>
+    <script>
+        let total = 0
+function adicionarItem() {
+  const produto = document.getElementById("produto").value
+  const valor = parseFloat(document.getElementById("valor").
+  value)
+  const quantidade = parseInt(document.getElementById
+  ("quantidade").value)
+
+  if(!produto || isNaN(valor) || isNaN(quantidade)) {
+    alert("Preencha todos os campos corretamente")
+  }
+
+  const subtotal = valor * quantidade
+  total += subtotal = valor * quantidade 
+  total += subtotal
+
+  const lista = document.getElementById("listarItens")
+const item = document.createElement("li")
+item.textContent = `${produto} - R$${valor.toFixed(2)} x ${quantidade} = R$${subtotal.toFixed(2)}`
+lista.appendChild(item) 
+
+document.getElementById("total").textContent = total.toFixed(2)
+
+// Limpar campos depois de adicionar um produto
+document.getElementById("produto").value = ""
+document.getElementById("valor").value = ""
+document.getElementById("quantidade").value = ""
+
+}
+function limparTudo() {
+document.getElementById("listarItens").innerHTML = ""
+document.getElementById("total").textContent = "0.00"
+total = 0
+}
+    </script>
+</body>
+</html>
