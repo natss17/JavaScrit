@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jogo Pulseira da Pandora</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <img src="pandora.png" alt="Pulseira da Pandora" class="imagem-topo" />
+  <img src="berloque.png" alt="Você encontrou o pingente secreto!" class="berloque" style="display: none;" />
+  <h1>✨ Jogo da Pulseira da Pandora ✨</h1>
+  <p>Digite um número entre 1 e 100 e tente adivinhar o número secreto!</p>
+
+  <input type="number" id="palpite" min="1" max="100" />
+  <button id="botaoTentar">Tentar</button>
+  <button id="botaoReiniciar" style="display: none;">🔁 Reiniciar Jogo</button>
+
+  <div id="mensagem" class="mensagem"></div>
+  <div id="historico" class="historico"></div>
+
+
+  <script src="script.js"></script>
+</body>
