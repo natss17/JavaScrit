@@ -4,9 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Floresta Mágica</title>
+    <style>
+        body {
+            background-image: url('floresta.avif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', sans-serif;
+            color: #2e5d34;
+            text-align: center;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            color: #f0f0f0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            margin-bottom: 30px;
+        }
+
+        #historia {
+            background-color: #ffffffcc;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            margin: 20px auto;
+        }
+
+        button {
+            background-color: #77bb99;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            margin: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 17px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background-color: #5e9c76;
+            transform: translateY(-2px);
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #3a7a42;
+        }
+    </style>
 </head>
 <body>
+
     <h1>🌲 A Floresta Mágica 🌟</h1>
+
     <div id="historia">
         <p>Você está na frente de uma floresta encantada. Deseja entrar?</p>
         <button onclick="escolha1('sim')">Entrar na floresta 🌳</button>
@@ -15,86 +74,79 @@
 
     <script>
         function escolha1(resposta) {
-            const div = document.getElementById("historia");
+            const div = document.getElementById("historia")
             if (resposta == "sim") {
                 div.innerHTML = `
                     <p>Você encontra dois caminhos misteriosos. Qual quer seguir?</p>
                     <button onclick="escolha2('esquerda')">Caminho da Névoa 🌫️</button>
                     <button onclick="escolha2('direita')">Trilha Iluminada ✨</button>
-                `;
+                `
             } else {
-                div.innerHTML = <p>Você voltou para casa em segurança. Às vezes, a prudência é a melhor escolha. 🛌 FIM</p>;
+                div.innerHTML = `<p>Você voltou para casa em segurança. Às vezes, a prudência é a melhor escolha. 🛌 FIM</p>`
             }
         }
 
         function escolha2(caminho) {
-            const div = document.getElementById("historia");
+            const div = document.getElementById("historia")
             if (caminho == "esquerda") {
                 div.innerHTML = `
                     <p>Você encontra um dragão adormecido 🐉. O que vai fazer?</p>
                     <button onclick="escolha3('lutar')">Lutar 🗡️</button>
                     <button onclick="escolha3('fugir')">Fugir 🏃‍♂️</button>
-                `;
-            } else {
+                `
+            } else if (caminho == "direita") {
                 div.innerHTML = `
-                    <p>Você encontra um baú brilhante no meio da trilha. O que faz?</p>
+                    <p>Você encontra um baú mágico brilhando. O que faz?</p>
                     <button onclick="escolha3('abrir')">Abrir o baú 🎁</button>
                     <button onclick="escolha3('ignorar')">Ignorar e seguir 🚶‍♀️</button>
-                `;
+                `
             }
         }
 
         function escolha3(acao) {
-            const div = document.getElementById("historia");
+            const div = document.getElementById("historia")
             switch (acao) {
                 case "lutar":
                     div.innerHTML = `
-                        <p>Você luta bravamente e vence o dragão! 🏆 Mais adiante, encontra uma fada. Ela te oferece um desejo. Aceita?</p>
+                        <p>Você luta bravamente e vence o dragão! 🏆 Uma fada aparece e oferece um desejo. Aceitar?</p>
                         <button onclick="escolha4('simDesejo')">Aceitar o desejo ✨</button>
-                        <button onclick="escolha4('naoDesejo')">Recusar e seguir 🍃</button>
-                    `;
-                    break;
+                        <button onclick="escolha4('naoDesejo')">Recusar 🍃</button>
+                    `
+                    break
                 case "fugir":
-                    div.innerHTML = <p>Você fugiu e voltou para a entrada da floresta. Às vezes, fugir é sobreviver. FIM 🏃‍♂️🌲</p>;
-                    break;
+                    div.innerHTML = `<p>Você fugiu e voltou para a entrada da floresta. 🏃‍♂️🌲 FIM</p>`
+                    break
                 case "abrir":
                     div.innerHTML = `
-                        <p>O baú tem uma poção mágica que te transforma em animal! 🦊 Você pode usá-la ou jogá-la fora.</p>
-                        <button onclick="escolha4('usarPocao')">Usar poção 🧪</button>
+                        <p>No baú há uma poção que pode transformar você em animal! 🦊 O que deseja fazer?</p>
+                        <button onclick="escolha4('usarPocao')">Usar a poção 🧪</button>
                         <button onclick="escolha4('jogarFora')">Jogar fora ❌</button>
-                    `;
-                    break;
+                    `
+                    break
                 case "ignorar":
-                    div.innerHTML = <p>Você segue a trilha e se perde... para sempre vagando na floresta encantada. 🌌 FIM</p>;
-                    break;
+                    div.innerHTML = `<p>Você continua andando e se perde na floresta para sempre... 🌌 FIM</p>`
+                    break
             }
         }
 
         function escolha4(decisao) {
-            const div = document.getElementById("historia");
+            const div = document.getElementById("historia")
             switch (decisao) {
                 case "simDesejo":
-                    div.innerHTML = `
-                        <p>Você deseja sabedoria eterna. A fada sorri e transforma você no Guardião da Floresta! 🌿 FIM</p>
-                    `;
-                    break;
+                    div.innerHTML = `<p>Você deseja sabedoria eterna. A fada sorri e te torna Guardião da Floresta! 🌿 FIM</p>`
+                    break
                 case "naoDesejo":
-                    div.innerHTML = `
-                        <p>Você continua a jornada e encontra um portal que te leva para casa com lembranças mágicas. ✨🏠 FIM</p>
-                    `;
-                    break;
+                    div.innerHTML = `<p>Você segue seu caminho e encontra um portal mágico que te leva de volta para casa com lembranças incríveis. ✨🏠 FIM</p>`
+                    break
                 case "usarPocao":
-                    div.innerHTML = `
-                        <p>Você vira uma coruja sábia 🦉 e passa a observar a floresta do alto, livre para sempre. FIM</p>
-                    `;
-                    break;
+                    div.innerHTML = `<p>Você se transforma em uma coruja sábia e voa livremente pela floresta. 🦉 FIM</p>`
+                    break
                 case "jogarFora":
-                    div.innerHTML = `
-                        <p>A poção cai no chão e flores mágicas crescem instantaneamente. Você decide viver ali como guardião da beleza. 🌺 FIM</p>
-                    `;
-                    break;
+                    div.innerHTML = `<p>A poção cai no chão e uma árvore mágica nasce. Você decide viver ali em paz. 🌳 FIM</p>`
+                    break
             }
         }
     </script>
+
 </body>
 </html>
