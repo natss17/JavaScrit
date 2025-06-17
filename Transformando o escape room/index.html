@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Escape Room - Transformando o Jogo</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #a96be2;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      text-align: center;
+    }
+    .hidden {
+      display: none;
+    }
+    button {
+      background-color: #62d37d;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+      width: 80%;
+    }
+    .feedback {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Tela Inicial -->
+    <div id="tela-inicial">
+      <h1>Escape Room</h1>
+      <p>Você está preso em uma sala. Resolva os enigmas para sair da sala!</p>
+      <button onclick="iniciarJogo()">Iniciar</button>
+    </div>
+
+    <!-- Sala Enigma 1 -->
+    <div id="sala-1" class="hidden">
+      <h2>Enigma 1: A Porta Misteriosa</h2>
+      <p>Para abrir a porta, responda: <br><em>O que é, o que é? Tem cabeça, tem dente, mas não é bicho nem gente?</em></p>
+      <input type="text" id="resposta-1" placeholder="Digite sua resposta aqui" />
+      <button onclick="verificarResposta(1)">Enviar</button>
+      <div class="feedback" id="feedback-1"></div>
+    </div>
+
+    <!-- Sala Enigma 2 -->
+    <div id="sala-2" class="hidden">
+      <h2>Enigma 2: O Cofre Secreto</h2>
+      <p>Qual número vem a seguir na sequência? <br><em>2, 3, 5, 7, 11, ?</em></p>
+      <input type="text" id="resposta-2" placeholder="Digite sua resposta aqui" />
+      <button onclick="verificarResposta(2)">Enviar</button>
+      <div class="feedback" id="feedback-2"></div>
+    </div>
+
+    <!-- Sala Enigma 3 -->
+    <div id="sala-3" class="hidden">
+      <h2>Enigma 3: A Caixa Misteriosa</h2>
+      <p>Qual palavra está escrita incorretamente no dicionário?</p>
+      <input type="text" id="resposta-3" placeholder="Digite sua resposta aqui" />
+      <button onclick="verificarResposta(3)">Enviar</button>
+      <div class="feedback" id="feedback-3"></div>
+    </div>
+
+    <!-- Sala Enigma 4 -->
+    <div id="sala-4" class="hidden">
+      <h2>Enigma 4: O Código Final</h2>
+      <p>Se dois é companhia e três é multidão, o que é um?</p>
+      <input type="text" id="resposta-4" placeholder="Digite sua resposta aqui" />
+      <button onclick="verificarResposta(4)">Enviar</button>
+      <div class="feedback" id="feedback-4"></div>
+    </div>
+
+    <!-- Tela Final -->
+    <div id="tela-final" class="hidden">
+      <h2>Parabéns! Você escapou 🥳🥳🙌🙌🎈🎉</h2>
+      <p>Você resolveu todos os enigmas e abriu a porta. Parabéns!</p>
+      <button onclick="reiniciar()">Jogar Novamente</button>
+    </div>
+
+  </div>
+
+  <script>
+    const respostasCorretas = {
+      1: ['alho', 'dente de alho'],
+      2: ['13'],
+      3: ['incorretamente'],
+      4: ['solidão', 'solidao']
+    };
+
+    const somPalmas = new Audio('palmas.mp3');
+    const somTristeza = new Audio('falha.mp3');
+
+    function iniciarJogo() {
+      document.getElementById('tela-inicial').classList.add('hidden');
+      mostrarSala(1);
+    }
+
+    function mostrarSala(num) {
+      for(let i=1; i<=4; i++) {
+        document.getElementById(`sala-${i}`).classList.add('hidden');
+        document.getElementById(`feedback-${i}`).textContent = '';
+        document.getElementById(`resposta-${i}`).value = '';
+      }
+      document.getElementById('tela-final').classList.add('hidden');
+      document.getElementById(`sala-${num}`).classList.remove('hidden');
+    }
+
+    function verificarResposta(num) {
+      const respostaInput = document.getElementById(`resposta-${num}`);
+      const resposta = respostaInput.value.trim().toLowerCase();
+      const feedback = document.getElementById(`feedback-${num}`);
+
+      if (respostasCorretas[num].includes(resposta)) {
+        feedback.style.color = 'lime';
+        feedback.textContent = 'Resposta correta! Avançando...';
+        somPalmas.play();
+        setTimeout(() => {
+          if (num < 4) {
+            mostrarSala(num + 1);
+          } else {
+            document.getElementById(`sala-${num}`).classList.add('hidden');
+            document.getElementById('tela-final').classList.remove('hidden');
+          }
+        }, 1500);
+      } else {
+        feedback.style.color = 'red';
+        feedback.textContent = 'Resposta incorreta. Voltando ao primeiro enigma!';
+        somTristeza.play();
+        setTimeout(() => {
+          mostrarSala(1);
+        }, 1500);
+      }
+    }
+
+    function reiniciar() {
+      document.getElementById('tela-final').classList.add('hidden');
+      document.getElementById('tela-inicial').classList.remove('hidden');
+      for(let i=1; i<=4; i++) {
+        document.getElementById(`resposta-${i}`).value = '';
+        document.getElementById(`feedback-${i}`).textContent = '';
+      }
+    }
+  </script>
+</body>
+</html>
