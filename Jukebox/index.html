@@ -1,58 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🎵 Jukebox 🎼</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      transition: background 0.5s;
+      font-family: sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(255, 245, 244, 0.8);
+      border-radius: 10px;
+      max-width: 400px;
+      width: 90vw;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      color: white;
+    }
+    button[data-emocao="alegria"]     { background-color: #fff176; color: #000; }
+    button[data-emocao="tristeza"]    { background-color: #0d47a1; }
+    button[data-emocao="aventura"]    { background-color: #388e3c; }
+    button[data-emocao="amor"]        { background-color: #f06292; }
+    button[data-emocao="misterio"]    { background-color: #212121; }
+    button[data-emocao="calma"]       { background-color: #26a69a; }
+    button[data-emocao="animacao"]    { background-color: #8e24aa; }
+    button[data-emocao="suspense"]    { background-color: #fb8c00; }
+
+    #imagem {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+    }
+    #foto {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+    #audio {
+      margin-top: 20px;
+      width: 100%;
+      display: none;
+    }
+    #nomeMusica {
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      min-height: 1.5em;
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
     <h1>Jukebox</h1>
     <p>Selecione como está se sentindo e ouça uma música</p>
 
-    <button onclick="tocar('feliz')">Feliz</button>
-    <button onclick="parar()">Parar</button>
+    <button onclick="tocar('alegria')" data-emocao="alegria">Alegria</button>
+    <button onclick="tocar('tristeza')" data-emocao="tristeza">Tristeza</button>
+    <button onclick="tocar('aventura')" data-emocao="aventura">Aventura</button>
+    <button onclick="tocar('amor')" data-emocao="amor">Amor/Romântica</button>
+    <button onclick="tocar('misterio')" data-emocao="misterio">Mistério/Terror</button>
+    <button onclick="tocar('calma')" data-emocao="calma">Calma/Relaxamento</button>
+    <button onclick="tocar('animacao')" data-emocao="animacao">Animação/Energia</button>
+    <button onclick="tocar('suspense')" data-emocao="suspense">Suspense/Curiosidade</button>
+    <button onclick="parar()" style="background-color: #999">Parar</button>
 
-    <div id="imagem" style="margin-top: 30px;">
-        <img src="" alt="" id="foto" width="300" style="display: none">
+    <div id="imagem">
+      <img src="" alt="" id="foto" style="display: none" />
     </div>
 
-    <audio src="" id="audio" controls style="margin-top: 20px; display: none"></audio>
+    <audio id="audio" controls></audio>
+    <div id="nomeMusica"></div>
+  </div>
 
-    <script>
-        function tocar(tipo) {
-            const audio = document.getElementById("audio")
-            const foto = document.getElementById("foto")
+<script>
+    function tocar(tipo) {
+        const audio = document.getElementById("audio")
+        const foto = document.getElementById("foto")
+        const nomeMusica = document.getElementById("nomeMusica")
 
-            let musica = ""
-            let imagem = ""
-            let cor = ""
+        let musica = ""
+        let imagem = ""
+        let fundo = ""
+        let nome = ""
 
-            if (tipo == "feliz") {
-                musica = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-                imagem = "https://st3.depositphotos.com/35030316/36856/v/450/depositphotos_368567650-stock-illustration-smile-icon-yellow-background-vector.jpg"
-                cor = "#ffe066"
-            }
-
-            document.body.style.backgroundColor = cor
-            foto.src = imagem
-            foto.style.display = "block"
-
-            audio.src = musica
-            audio.play()
-            audio.style.display = "block"
+        if (tipo == "alegria") {
+            musica = "alegria.mp3"
+            imagem = "https://blog-static.petlove.com.br/wp-content/uploads/2020/09/seis-formas-deixar-cao-mais-feliz-petlove.jpg"
+            fundo = "#fff176"
+            nome = "Quero Ser Feliz Também"
         }
 
-        function parar() {
-            const audio = document.getElementById("audio")
-            audio.pause()
-            audio.currentTime = 0
-            audio.style.display = "none"
-
-            const foto = document.getElementById("foto")
-            foto.style.display = "none"
-
-            document.body.style.backgroundColor = "#fff"
+        if (tipo == "tristeza") {
+            musica = "triste.mp3"
+            imagem = "https://media.istockphoto.com/id/498523636/pt/foto/engra%C3%A7ado-c%C3%A3o-olhando-isolado-em-fundo-branco.jpg?s=612x612&w=0&k=20&c=HODJ4S61Up4nQyWkM7Si01Az-0nqTg94QTwIS7fieuU="
+            fundo = "#0d47a1"
+            nome = "Hoje Sou Eu Que Não Mais Te Quero"
         }
-    </script>
-</body>
-</html>
+
+        if (tipo == "aventura") {
+            musica = "aventura.mp3"
+            imagem = "https://img2.lovecell.com.br/a101497d09e766e1c6d900c610129c512886715afed43ad3c7c50b0c700dc683.webp"
+            fundo = "#388e3c"
+            nome = "Animação Aventura"
+        }
+
+        if (tipo == "amor") {
+            musica = "amor.mp3"
+            imagem = "https://i.pinimg.com/736x/28/da/9d/28da9d6ca3d6c272c529b1f06b20f472.jpg"
+            fundo = "#f8bbd0"
+            nome = "Dona do Meu Pensamento"
+        }
+
+        if (tipo == "misterio") {
+            musica = "misterio.mp3"
+            imagem = "https://fly.metroimg.com/upload/q_85,w_180/https://uploads.metroimg.com/wp-content/uploads/2023/11/05162830/Cachorro-tem-expressao-facial-unica-e-vira-meme-Esta-me-julgando-1.jpg"
+            fundo = "#212121"
+            nome = "Animação Mistério"
+        }
+
+        if (tipo == "calma") {
+            musica = "calma.mp3"
+            imagem = "https://blog-static.petlove.com.br/wp-content/uploads/2015/07/cachorro-calmo.jpg"
+            fundo = "#b2dfdb"
+            nome = "Tudo Vai Dar Certo"
+        }
+
+        if (tipo == "animacao") {
+            musica = "animação.mp3"
+            imagem = "https://love.doghero.com.br/wp-content/uploads/2018/12/golden-retriever-1.png"
+            fundo = "#8e24aa"
+            nome = "Você Me Encantou Demais"
+        }
+
+        if (tipo == "suspense") {
+            musica = "suspense.mp3"
+            imagem = "https://www.petz.com.br/blog/wp-content/uploads/2020/05/cachorro-com-medo-da-chuva.jpg"
+            fundo = "#fb8c00"
+            nome = "Animação Suspense"
+        }
+
+        document.body.style.backgroundImage = ""
+        document.body.style.backgroundColor = fundo
+
+        foto.src = imagem
+        foto.style.display = "block"
+
+        audio.src = musica
+        audio.play()
+        audio.style.display = "block"
+
+        nomeMusica.textContent = `🎵 Tocando agora: ${nome}`
+    }
+
+    function parar() {
+        const audio = document.getElementById("audio")
+        audio.pause()
+        audio.currentTime = 0
+        audio.style.display = "none"
+
+        const foto = document.getElementById("foto")
+        foto.style.display = "none"
+
+        document.body.style.backgroundColor = "#fff"
+        document.body.style.backgroundImage = ""
+
+        document.getElementById("nomeMusica").textContent = ""
+    }
+</script>
